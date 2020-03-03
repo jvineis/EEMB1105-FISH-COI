@@ -4,7 +4,7 @@ Tutorial to analyze COI DNA sequences of fish tissue collected from commercial a
 ## 1.  Open a terminal window on you laptop or PC
 For all mac users you can find a terminal window by double clicking on the finder and navigating to "Applications" then to "Utilities" and double click on the "Terminal" icon  
 
-*ALL THE STEPS BELOW WILL BE CARRIED OUT IN THIS TERMINAL WINDOW*
+*ALL THE STEPS BELOW WILL BE CARRIED OUT IN THIS TERMINAL WINDOW* - you will enter the text in the grey boxes below and hit enter to run the command.  We will also create bash scripts to run commands throught the cluster using emacs.  I will create a separate small tutorial for this.  
 
 ## 2. log into the discovery cluster
 
@@ -41,16 +41,16 @@ keep your current terminal window open and hit the *command* followed by the *n*
 
     module load EEMB1105/01-24-2020
 
-## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the sequences in your directory   
+## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the sequences in your directory.  This command will be run using sbatch   
 
     trimseq -sequence *sequence1F.ab1* -outseq *sequence1F-trimmed.fa* -window 20 -percent 5
     trimseq -sequence *sequence1R.ab1* -outseq *sequence1R-trimmed.fa* -window 20 -percent 5
 
-## 10.  Reverse compliment the forward sequence
+## 10.  Reverse compliment the forward sequence. This command will be run using sbatch
 
     revseq -sequence sequence1F-trimmed.fa -outseq sequence1F-trimmed-rev.fa
 
-## 11.  Merge the forward and reverse sequences
+## 11.  Merge the forward and reverse sequences.  This command will be run using sbatch
 
     merger -asequence sequence1F-trimmed-rev.fa -bsequence sequence1R-trimmed.fa -outfile sequence1-merged.aln -outseq sequence1-merged.fa
 
@@ -58,9 +58,9 @@ you should inspect the sequence1-merged.aln file. Enter this to see what it look
 
     more sequence1-merged.aln
 
-## 12.  blast the merged sequences against the database of COI sequences
+## 12.  blast the merged sequences against the database of COI sequences.  This command will be run using sbatch
 
-    blastn 
+    blastn -db FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
     
 ###  FOR JOE : working in this directory : /scratch/vineis.j/cap-test
 
