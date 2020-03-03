@@ -1,22 +1,22 @@
 # EEMB1105-FISH-COI
 Tutorial to analyze COI DNA sequences of fish tissue collected from commercial and restaurant sources.
 
-## 1.  Open a terminal window on you laptop or PC.: 
+## 1.  Open a terminal window on you laptop or PC
 For all mac users you can find a terminal window by double clicking on the finder and navigating to "Applications" then to "Utilities" and double click on the "Terminal" icon  
 
 *ALL THE STEPS BELOW WILL BE CARRIED OUT IN THIS TERMINAL WINDOW*
 
-## 2. log into the discovery cluster:
+## 2. log into the discovery cluster
 
 ssh *user.name*@login.discovery.neu.edu 
 
 instead of *user.name*, add your own credentials (usually, last name followed by a ".", then your first initial enter your password when prompted 
 
-## 3. change to the course directory:
+## 3. change to the course directory
 
 cd /shared/rc/training/
 
-## 4. make a directory (folder) for your DNA sequences which should be something like your last name, for example:
+## 4. make a directory (folder) for your DNA sequences which should be something like your last name, for example
 
 mkdir vineis
 
@@ -26,7 +26,7 @@ this will make a new directory in /shared/rc/training/ called vineis
 
 cd vineis
 
-## 6. copy your sequences from the directory that contains everyones sequences to your working directory (where you should be now).
+## 6. copy your sequences from the directory that contains everyones sequences to your working directory (where you should be now)
 
 cp /shared/rc/training/*ALL-SEQ-DIRECTORY*/*my_sequences.ab1* /shared/rc/training/*user.name*/
 
@@ -41,6 +41,15 @@ rsync -HalP *user.name*@login.discovery.neu.edu:/shared/rc/training/*user.name*/
 
  module load EEMB1105/01-24-2020
 
-## 9.  Trim the sequences based on the quality score.  
+## 9.  Trim the sequences based on the presence of Ns (unknown characters). You will need to do this for all of the sequences in your directory   
 
+trimseq -sequence *sequence1F.ab1* -outseq *sequence1F.fa* -window 20 -percent 5
+
+## 10.  Merge the forward and reverse sequences
+
+merger -asequence *sequence1F.ab1* -bsequence *sequence1R.ab1* -outfile *seq1-merged.aln* -outseq *seq1-merged.fa*
+
+## 11.  blast the merged sequences against the database of COI sequences
+
+blastn 
 
