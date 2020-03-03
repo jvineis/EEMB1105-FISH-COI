@@ -14,7 +14,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
 ## 3. change to the course directory
 
-cd /shared/rc/training/
+    cd /shared/rc/training/
 
 ## 4. make a directory (folder) for your DNA sequences which should be something like your last name, for example
 
