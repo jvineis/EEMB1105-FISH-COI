@@ -61,4 +61,34 @@ you should inspect the sequence1-merged.aln file. Enter this to see what it look
 ## 12.  blast the merged sequences against the database of COI sequences
 
     blastn 
+    
+###  FOR JOE : working in this directory : /scratch/vineis.j/cap-test
+
+I rec'd a set of fasta files with forward and rev sequences for some COI fish samples from Rosie Falco.  I placed these here /scratch/vineis.j/cap-test/RAW-sequences in the discovery server.  I tested quality filtering like this.  which seems to work well. Starts by removing Ns within a 20bp window from start and end of the sequences, then reverse compliment the forward sequence, then merge the two.. There was 100% consensus among the forward and reverse sequences.  Will be good to inspect the *.aln* file for each merger.
+
+    trimseq -sequence Yuan_10-Fish-H-Fish-H.ab1 -outseq Yuan_10-Fish-H-Fish-H-trimmed.ab1 -window 20 -percent 5
+    trimseq -sequence Yuan_10-Fish-L-Fish-L.ab1 -outseq Yuan_10-Fish-L-Fish-L-trimmed.ab1 -window 20 -percent 5
+    revseq -sequence Yuan_10-Fish-H-Fish-H-trimmed.ab1 -outseq Yuan_10-Fish-H-Fish-H-trimmed-rev.ab1
+    merger -asequence Yuan_10-Fish-H-Fish-H-trimmed-rev.ab1 -bsequence Yuan_10-Fish-L-Fish-L-trimmed.ab1 -outfile Yuan_10-merged.aln -outseq Yuan_10-merged.f
+
+I rec'd an excel sheet with a list of sequences from Rosie Falco (Ocean Genome Legacy program) called something like FDA-RSSL-For-Website-Upload-Sept-2018.txt.  I converted this into a fasta file using the following script. Before running the script I manually edited the file so that there are three columns.  The first is the unique ID of the seq, scond column is the taxonomy of the sequence, and the third is the sequence.  Then I ran this to create a fasta file that I like.
+
+    python ~/scripts/create-fasta-from-table.py FDA-RSSL-For-Website-Upload-Sept-2018.txt FDA-RSSL.fa
+    
+Then I build a blastdb like this
+
+    makeblastdb -in FDA-RSSL.fa -parse_seqids -blastdb_version 5 -title "FDA-RSSL-db" -dbtype nucl
+    
+Then I tested it by unloading the class module and loading the blast module
+    
+    module unload
+    module load ncbi-blast+/2.9.0
+    
+Then I tried and example blast and it worked great!
+
+    blastn -db ../FDA-RSSL.fa -query Yuan_10-merged.fa -out x_test.txt
+    
+    
+
+    
 
