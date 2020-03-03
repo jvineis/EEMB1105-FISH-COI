@@ -88,6 +88,22 @@ Then I tried and example blast and it worked great!
 
     blastn -db ../FDA-RSSL.fa -query Yuan_10-merged.fa -out x_test.txt
     
+I also build an alignment using the batch script below
+
+    #!/bin/bash
+
+    #SBATCH --nodes=1
+    #SBATCH --tasks-per-node=1
+    #SBATCH --time=6:00:00
+    #SBATCH --mem=10Gb
+    #SBATCH --partition=short
+
+    module load EEMB1105/01-24-2020
+    clustalw2 FDA-RSSL.fa
+    
+Then I build a tree using the alignment.. I tried this on my own machine because of problems with the FastTree install on discovery.. Used clustall all the way.  Just wanted to see what the tree looks like and if its realistic for students.
+
+    
     
 
     
