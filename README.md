@@ -26,16 +26,14 @@ this will make a new directory in /shared/rc/training/ called vineis
 
     cd vineis
 
-## 6. copy your sequences from the directory that contains everyones sequences to your working directory (where you should be now)
+## 6. Your TA will move sequences from the folder that contains everyones sequences to your working directory (where you should be now)
 
     cp /shared/rc/training/*ALL-SEQ-DIRECTORY*/*my_sequences.ab1* /shared/rc/training/*user.name*/
 
-you will need to do this for each of the sequences in your list.. can you think of an awesome way to do this so that you don't have to do the same thing more than once?
-
-## 7. Copy the sequences to your computer to view their quality in (whatever we choose to look at chromatogram files)
+## 7. Copy the sequences to your computer to view their quality in (whatever we choose to look at chromatogram files).  
 keep your current terminal window open and hit the *command* followed by the *n* key (without letting go of the *command* key) to open a new terminal window.  Here we will use the rsync command to copy the files from the discovery cluster to our laptops like thus.
 
-    rsync -HalP *user.name*@login.discovery.neu.edu:/shared/rc/training/*user.name*/*.ab1* */a/directory/of-your-choice/*
+    rsync -HalP *user.name*@login.discovery.neu.edu:/shared/rc/training/*user.name*/*.ab1* */a/folder/of-your-choice/*
 
 ## 8.  Load the module(settings) for all of the software that you will reuire for the analysis
 
@@ -50,7 +48,7 @@ keep your current terminal window open and hit the *command* followed by the *n*
 
     revseq -sequence sequence1F-trimmed.fa -outseq sequence1F-trimmed-rev.fa
 
-## 11.  Merge the forward and reverse sequences.  This command will be run using sbatch
+## 11.  Merge the forward and reverse sequences.  This command requires the ouput from the previous sept as input.  This command will be run using sbatch
 
     merger -asequence sequence1F-trimmed-rev.fa -bsequence sequence1R-trimmed.fa -outfile sequence1-merged.aln -outseq sequence1-merged.fa
 
