@@ -10,7 +10,7 @@ For all mac users you can find a terminal window by double clicking on the finde
 
     ssh *user.name*@login.discovery.neu.edu 
 
-instead of *user.name*, add your own credentials (usually, last name followed by a ".", then your first initial enter your password when prompted 
+instead of *user.name*, add your own credentials (usually, last name followed by a ".", then your first initial enter your password when prompted. Your password will not show up as you type - because someone might be reading it over your shoulder.
 
 ## 3. change to the course directory
 
