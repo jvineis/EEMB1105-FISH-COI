@@ -12,28 +12,21 @@ For all mac users you can find a terminal window by double clicking on the finde
 
 instead of *user.name*, add your own credentials (usually, last name followed by a ".", then your first initial enter your password when prompted. Your password will not show up as you type - because someone might be reading it over your shoulder.
 
-## 3. change to the course directory
+## 3. change to the course directory containing the COI fish sequences
 
-    cd /shared/rc/training/
+    cd /work/jennifer.bowen/EEMB1105/Fish_COI_barcode_JL_30-359950134_ab1/
 
-## 4. make a directory (folder) for your DNA sequences which should be something like your last name, for example
+## 4. make a directory (folder) for your DNA sequences in your scratch directory
 
-    mkdir vineis
+    mkdir /scratch/*user.name*/FISH-COI
 
-this will make a new directory in /shared/rc/training/ called vineis
+## 5. copy the ab1 files from the Fish_COI_barcode_JL_30-359950134_ab1/ (where you should be) to your new directory in scratch
 
-## 5. change to this directory by typing "cd" followed by the text you provided after mkdir in step4
+    cp *ab1 /scratch/*user.name*/FISH-COI
 
-    cd vineis
+## 6. change to the directory where you just moved all the sequences to 
 
-## 6. Your TA will move sequences from the folder that contains everyones sequences to your working directory (where you should be now)
-
-    cp /shared/rc/training/*ALL-SEQ-DIRECTORY*/*my_sequences.ab1* /shared/rc/training/*user.name*/
-
-## 7. Copy the sequences to your computer to view their quality in (whatever we choose to look at chromatogram files).  
-keep your current terminal window open and hit the *command* followed by the *n* key (without letting go of the *command* key) to open a new terminal window.  Here we will use the rsync command to copy the files from the discovery cluster to our laptops like thus.
-
-    rsync -HalP *user.name*@login.discovery.neu.edu:/shared/rc/training/*user.name*/*.ab1* */a/folder/of-your-choice/*
+    cd /scratch/*user.name*/FISH-COI
 
 ## 8.  Load the module(settings) for all of the software that you will reuire for the analysis
 
