@@ -27,6 +27,21 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 ## 6. change to the directory where you just moved all the sequences to 
 
     cd /scratch/*user.name*/FISH-COI
+    
+## 7. Download the samples to your own computer and view the chromatogram files using 4peaks.  First you will need to download the 4Peaks software from here. https://nucleobytes.com/4peaks/index.html... If you have trouble with this, talk to Johannah.. she's the best!
+
+#### 7a. open a new terminal window on your own computer by moving your mouse to the upper left of your screen and clicking on "Shell" the click on "New Window"
+
+#### 7b. make a folder on your computer to copy the "ab1" files like this
+
+     mkdir ~/Downloads/FISH-COI/
+
+#### 7c. copy the files from the discovery cluster to your machine like this (make sure that you replace "user.name" with your own, e.g. vineis.j .  No need for the quotes, they are just there to remind you to use your own user name. 
+
+    rsync -HalP "user.name"@login.discovery.neu.edu:/scratch/"user.name"/FISH-COI/*ab1 ~/Downloads/FISH-COI/
+
+#### 7d. You should see the files download one at a time.  When its complete, you can open the ab1 files using 4Peaks.  So beautiful!
+
 
 ## 8.  Load the module(settings) for all of the software that you will reuire for the analysis
 
