@@ -40,7 +40,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
     rsync -HalP "user.name"@login.discovery.neu.edu:/scratch/"user.name"/FISH-COI/*ab1 ~/Downloads/FISH-COI/
 
-#### 7d. You should see the files download one at a time.  When its complete, you can open the ab1 files using 4Peaks.  So beautiful!
+#### 7d. You should see the files download one at a time.  When its complete, you can open the ab1 files using 4Peaks.  Just open the software and click on the word "File" in the upper left of your computer display and then select "Open".  Then navigate in your Finder window to the ~/Downloads/FISH-COI/ and select the file that you would like to veiw. So beautiful!
 
 
 ## 8.  Load the module(settings) for all of the software that you will reuire for the analysis
