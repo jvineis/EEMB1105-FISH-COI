@@ -47,20 +47,53 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
     module load EEMB1105/01-24-2020
     
-## Now that you are all set up with your data and the software that you need to be sequencing genious, you need to know how to run a program on the discovery cluster.  When you log into discovery, you are working from a computer (head node) that controls a huge number of other high performance computers (nodes).  Running commands that process your sequences from the head node is BAD!! The head node is already working hard for other people to distribute the commands that they are submitting, so slowing it down with heavier tasks is very inconsiderate!  To "submit a job" aka "run a script", aka "execute a command" we need to create a file that communicates details to the head node about a job we want to submit, such as how much memory we think it will take, and how long we expect the job to run etc.. We can communitcate all of these details in a "Slurm script" aka "bash script" aka "sbatch script". Here is an example of what one looks like with annotation of what each line means.
+#### MUST READ TO UNDERSTAND THE REST OF THE TUTORIAL: Now that you are all set up with your data and the software that you need to be sequencing genious, you need to know how to run a program on the discovery cluster.  When you log into discovery, you are working from a computer (head node) that controls a huge number of other high performance computers (nodes).  Running commands that process your sequences from the head node is BAD!! The head node is already working hard for other people to distribute the commands that they are submitting, so slowing it down with heavier tasks is very inconsiderate!  To "submit a job" aka "run a script", aka "execute a command" we need to create a file that communicates details to the head node about a job we want to submit, such as how much memory we think it will take, and how long we expect the job to run etc.. We can communitcate all of these details in a "Slurm script" aka "bash script" aka "sbatch script". Here is an example of what one looks like with annotation of what each line means.
 
 
-## You will use "emacs" to create a "sbatch script" identical to the one above in your /scratch/*user.name*/FISH-COI/ directory according to the following steps.  
+#### You will use "emacs" to create a "sbatch script" identical to the one above in your /scratch/*user.name*/FISH-COI/ directory according to the following steps.  
 
-#### 1. type the following in your terminal to change to th
+##### 1. Just to be sure that you are in the correct location, change to the directory you created that contains all of your COI sequences.
 
+    cd /scratch/*user.name*/FISH-COI/
+    
+##### 2. open a new file called "x_sbatch-to-run-commands.shx".  The command below is using a program called emacs to create and open a new file called "x_sbatch-to-run-commands.shx".  When you type the command below, a blank screen will appear in your terminal.
 
-## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the sequences in your directory.  This command will be run using sbatch   
+    emacs x_sbatch-to-run-commands.shx
+    
+##### 3. Copy and paste the following txt into the blank space that appeared when you ran the emacs command above
+
+    #!/bin/bash  # this tells the head node that I'm speaking in "bash" language.
+
+    #SBATCH --nodes=1                #This specifies the number of nodes I need
+    #SBATCH --tasks-per-node=1       #This is the number of tasks per node and only needs to be changed if the job can be broken apart into smaller jobs.. not the case for any of the jobs you will submit
+    #SBATCH --time=00:30:00          #The amount of time that you think the command will take to run
+    #SBATCH --mem=50Gb               #The amount of memory required for the command
+    #SBATCH --partition=express      #There are several partioins (large groups of nodes) that you can submit jobs to.. your jobs will all be submitted to the express
+
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ## You will never need to change any of the details above this line.  All the business is below the line above
+    ## anything with a "#" in from of it will not be read by the head node except for the "#SBATCH" details above.  I use "##" before any notes I want to remember about this job submission and a "#" in front of commands that I don't want to run.
+    
+    ## Trim each forward and reverse sequences (step 9 of the tutorial)
+    trimseq -sequence *sequence1F.ab1* -outseq *sequence1F-trimmed.fa* -window 20 -percent 5
+    trimseq -sequence *sequence1R.ab1* -outseq *sequence1R-trimmed.fa* -window 20 -percent 5
+    
+    ## Reverse compliment the forward sequence (*step 10 of the tutorial)
+    revseq -sequence sequence1F-trimmed.fa -outseq sequence1F-trimmed-rev.fa
+    
+    ## Merge the forward and reverse sequences (step 11 of the tutorial)
+     merger -asequence sequence1F-trimmed-rev.fa -bsequence sequence1R-trimmed.fa -outfile sequence1-merged.aln -outseq sequence1-merged.fa
+    
+    ## To blast a sequence against the reference database of COI fish sequences provied by the Ocean Genome Legacy.
+    #blastn -db /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
+    
+
+## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the sequences in your directory.  This command will be run using sbatch.  Make sure all lines are commented out except for these lines.   
 
     trimseq -sequence *sequence1F.ab1* -outseq *sequence1F-trimmed.fa* -window 20 -percent 5
     trimseq -sequence *sequence1R.ab1* -outseq *sequence1R-trimmed.fa* -window 20 -percent 5
 
-## 10.  Reverse compliment the forward sequence. This command will be run using sbatch
+## 10.  Reverse compliment the forward sequence. This command will be run using sbatch. Make sure all other commands are commented out except for this line
 
     revseq -sequence sequence1F-trimmed.fa -outseq sequence1F-trimmed-rev.fa
 
