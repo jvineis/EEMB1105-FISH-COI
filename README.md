@@ -89,34 +89,39 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
 ##### 3. You will make changes to the sbatch script anytime that you want to run a different command below.  The main change that you will make is adding and subtracting "#" at the beginning of specific lines in order to run each of the individual steps to process the sequences. So pick things up at step 9 below.  
 
-## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the COI sequences that you generated.  This command will be run using sbatch.  Make sure all lines are commented out except for these lines.   
+## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the COI sequences that you generated.  This command will be run using sbatch.  Delete the "#" in front of these lines, remove the * characters from the lines, and change all the names contained between these characters to the relevant names of your sequence "ab1" files.
+   
     trimseq -sequence *sequence1F.ab1* -outseq *sequence1F-trimmed.fa* -window 20 -percent 5
     trimseq -sequence *sequence1R.ab1* -outseq *sequence1R-trimmed.fa* -window 20 -percent 5
     
-##### once you make these changes in your x_sbatch-to-run-commands.shx file, run the command like this
+##### once you make these changes in your x_sbatch-to-run-commands.shx file and you have saved your changes, run the command like this
 
     sbatch x_sbatch-to-run-commands.shx
 
-## 10.  Reverse compliment the forward sequence. This command will be run using sbatch. Make sure all other commands are commented out (have a "#" in front of them) in your bash script except for this line.
+## 10.  Reverse compliment the forward sequence. This command will be run using sbatch. Delete the "#" in front of these lines, remove the * characters from the lines, and change all the names contained between these characters to the relevant names of your sequence
 
-    revseq -sequence sequence1F-trimmed.fa -outseq sequence1F-trimmed-rev.fa
+    revseq -sequence *sequence1F-trimmed.fa* -outseq *sequence1F-trimmed-rev.fa*
 
 ## 11.  Merge the forward and reverse sequences.  This command requires the ouput from the previous sept as input.  This command will be run using sbatch
 
     merger -asequence sequence1F-trimmed-rev.fa -bsequence sequence1R-trimmed.fa -outfile sequence1-merged.aln -outseq sequence1-merged.fa
 
-you should inspect the sequence1-merged.aln file. Enter this to see what it looks like
+##### you should inspect the sequence1-merged.aln file. Enter this to see what it looks like
 
     more sequence1-merged.aln
 
 ## 12.  blast the merged sequences against the database of COI sequences.  This command will be run using sbatch
 ### first you need to unload the modules for the course and load the blast module
+
     module unload
     module load ncbi-blast+/2.9.0
+
 ### now run the blast command
+   
     blastn -db /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
     
 ### inspect the results when its complete
+   
     more sequence1-merged-blastout
     
 ###  FOR JOE : working in this directory : /scratch/vineis.j/cap-test
