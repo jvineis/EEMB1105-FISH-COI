@@ -87,7 +87,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     ## To blast a sequence against the reference database of COI fish sequences provied by the Ocean Genome Legacy.
     #blastn -db /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
 
-##### 3. You will make changes to the sbatch script anytime that you want to run a different command below.  The main change that you will make is adding and subtracting "#" at the beginning of specific lines in order to run each of the individual steps to process the sequences. So pick things up at step 9 below.  
+##### 4. You will make changes to the sbatch script anytime that you want to run a different command below.  The main change that you will make is adding and subtracting "#" at the beginning of specific lines in order to run each of the individual steps to process the sequences. So pick things up at step 9 below.  
 
 ## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the COI sequences that you generated.  This command will be run using sbatch.  Delete the "#" in front of these lines, remove the * characters from the lines, and change all the names contained between these characters to the relevant names of your sequence "ab1" files.
    
