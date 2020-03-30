@@ -40,12 +40,20 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
     rsync -HalP "user.name"@login.discovery.neu.edu:/scratch/"user.name"/FISH-COI/*ab1 ~/Downloads/FISH-COI/
 
-#### 7d. You should see the files download one at a time.  When its complete, you can open the ab1 files using 4Peaks.  Just open the software and click on the word "File" in the upper left of your computer display and then select "Open".  Then navigate in your Finder window to the ~/Downloads/FISH-COI/ and select the file that you would like to veiw. So beautiful!
+#### 7d. You should see the files download one at a time.  When its complete, you can open the ab1 files using 4Peaks.  Just open the software and click on the word "File" in the upper left of your computer display and then select "Open".  Then navigate in your Finder window to the ~/Downloads/FISH-COI/ and select the file that you would like to veiw. So beautiful! Once you are done with this, you can return to the terminal that is logged into discovery and pick up where you left off .  
 
 
 ## 8.  Load the module(settings) for all of the software that you will reuire for the analysis
 
     module load EEMB1105/01-24-2020
+    
+## Now that you are all set up with your data and the software that you need to be sequencing genious, you need to know how to run a program on the discovery cluster.  When you log into discovery, you are working from a computer (head node) that controls a huge number of other high performance computers (nodes).  Running commands that process your sequences from the head node is BAD!! The head node is already working hard for other people to distribute the commands that they are submitting, so slowing it down with heavier tasks is very inconsiderate!  To "submit a job" aka "run a script", aka "execute a command" we need to create a file that communicates details to the head node about a job we want to submit, such as how much memory we think it will take, and how long we expect the job to run etc.. We can communitcate all of these details in a "Slurm script" aka "bash script" aka "sbatch script". Here is an example of what one looks like with annotation of what each line means.
+
+
+## You will use "emacs" to create a "sbatch script" identical to the one above in your /scratch/*user.name*/FISH-COI/ directory according to the following steps.  
+
+#### 1. type the following in your terminal to change to th
+
 
 ## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the sequences in your directory.  This command will be run using sbatch   
 
