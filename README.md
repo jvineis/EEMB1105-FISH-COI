@@ -65,7 +65,10 @@ you should inspect the sequence1-merged.aln file. Enter this to see what it look
     more sequence1-merged.aln
 
 ## 12.  blast the merged sequences against the database of COI sequences.  This command will be run using sbatch
-
+### first you need to unload the modules for the course and load the blast module
+    module unload
+    module load ncbi-blast+/2.9.0
+### now run the blast command
     blastn -db FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
     
 ###  FOR JOE : working in this directory : /scratch/vineis.j/cap-test
