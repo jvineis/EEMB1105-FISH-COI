@@ -69,7 +69,10 @@ you should inspect the sequence1-merged.aln file. Enter this to see what it look
     module unload
     module load ncbi-blast+/2.9.0
 ### now run the blast command
-    blastn -db FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
+    blastn -db /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
+    
+### inspect the results when its complete
+    more sequence1-merged-blastout
     
 ###  FOR JOE : working in this directory : /scratch/vineis.j/cap-test
 
