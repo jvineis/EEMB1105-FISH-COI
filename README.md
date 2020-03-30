@@ -60,7 +60,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
     emacs x_sbatch-to-run-commands.shx
     
-##### 3. Copy and paste the following txt into the blank space that appeared when you ran the emacs command above.  Then you save the file and close it by followig the next steps exactly: 1. hold down the "control" key; 2. press the "x" key; 3. release the "x" key; 4. press the "s" key; 5. release the "s" key 6. release the "control" key.  7.  hold down the "control" key; 8. press the "x" key; 9. release the "x" key; 10. press the "c" key; 11. release the "c" key; 12. release the "control" key.  Your file will now be saved and closed.  You can reopen it using step 2 above and make the edits that you will need to run each of the scripts below. 
+##### 3. Copy and paste the following test below (beginning with "#!/bin/bash) into the blank space that appeared when you ran the emacs command above.  Then you save the file and close it by followig the next steps exactly: 1. hold down the "control" key; 2. press the "x" key; 3. release the "x" key; 4. press the "s" key; 5. release the "s" key 6. release the "control" key.  7.  hold down the "control" key; 8. press the "x" key; 9. release the "x" key; 10. press the "c" key; 11. release the "c" key; 12. release the "control" key.  Your file will now be saved and closed.  You can reopen it using step 2 above and make the edits that you will need to run each of the scripts below. 
 
     #!/bin/bash  # this tells the head node that I'm speaking in "bash" language.
 
@@ -75,14 +75,14 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     ## anything with a "#" in from of it will not be read by the head node except for the "#SBATCH" details above.  I use "##" before any notes I want to remember about this job submission and a "#" in front of commands that I don't want to run.
     
     ## Trim each forward and reverse sequences (step 9 of the tutorial)
-    trimseq -sequence *sequence1F.ab1* -outseq *sequence1F-trimmed.fa* -window 20 -percent 5
-    trimseq -sequence *sequence1R.ab1* -outseq *sequence1R-trimmed.fa* -window 20 -percent 5
+    #trimseq -sequence *sequence1F.ab1* -outseq *sequence1F-trimmed.fa* -window 20 -percent 5
+    #trimseq -sequence *sequence1R.ab1* -outseq *sequence1R-trimmed.fa* -window 20 -percent 5
     
     ## Reverse compliment the forward sequence (*step 10 of the tutorial)
-    revseq -sequence sequence1F-trimmed.fa -outseq sequence1F-trimmed-rev.fa
+    #revseq -sequence sequence1F-trimmed.fa -outseq sequence1F-trimmed-rev.fa
     
     ## Merge the forward and reverse sequences (step 11 of the tutorial)
-     merger -asequence sequence1F-trimmed-rev.fa -bsequence sequence1R-trimmed.fa -outfile sequence1-merged.aln -outseq sequence1-merged.fa
+    #merger -asequence sequence1F-trimmed-rev.fa -bsequence sequence1R-trimmed.fa -outfile sequence1-merged.aln -outseq sequence1-merged.fa
     
     ## To blast a sequence against the reference database of COI fish sequences provied by the Ocean Genome Legacy.
     #blastn -db /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
