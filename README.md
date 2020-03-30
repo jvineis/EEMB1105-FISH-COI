@@ -60,7 +60,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
     emacs x_sbatch-to-run-commands.shx
     
-##### 3. Copy and paste the following txt into the blank space that appeared when you ran the emacs command above
+##### 3. Copy and paste the following txt into the blank space that appeared when you ran the emacs command above.  Then you save the file and close it by followig the next steps exactly: 1. hold down the "control" key; 2. press the "x" key; 3. release the "x" key; 4. press the "s" key; 5. release the "s" key 6. release the "control" key.  7.  hold down the "control" key; 8. press the "x" key; 9. release the "x" key; 10. press the "c" key; 11. release the "c" key; 12. release the "control" key.  Your file will now be saved and closed.  You can reopen it using step 2 above and make the edits that you will need to run each of the scripts below. 
 
     #!/bin/bash  # this tells the head node that I'm speaking in "bash" language.
 
@@ -86,14 +86,18 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     
     ## To blast a sequence against the reference database of COI fish sequences provied by the Ocean Genome Legacy.
     #blastn -db /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
-    
 
-## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the sequences in your directory.  This command will be run using sbatch.  Make sure all lines are commented out except for these lines.   
+##### 3. You will make changes to the sbatch script anytime that you want to run a different command below.  The main change that you will make is adding and subtracting "#" at the beginning of specific lines in order to run each of the individual steps to process the sequences. So pick things up at step 9 below.  
 
+## 9.  Trim each forward and reverse sequence based on the presence of Ns (unknown characters). You will need to do this for all of the COI sequences that you generated.  This command will be run using sbatch.  Make sure all lines are commented out except for these lines.   
     trimseq -sequence *sequence1F.ab1* -outseq *sequence1F-trimmed.fa* -window 20 -percent 5
     trimseq -sequence *sequence1R.ab1* -outseq *sequence1R-trimmed.fa* -window 20 -percent 5
+    
+##### once you make these changes in your x_sbatch-to-run-commands.shx file, run the command like this
 
-## 10.  Reverse compliment the forward sequence. This command will be run using sbatch. Make sure all other commands are commented out except for this line
+    sbatch x_sbatch-to-run-commands.shx
+
+## 10.  Reverse compliment the forward sequence. This command will be run using sbatch. Make sure all other commands are commented out (have a "#" in front of them) in your bash script except for this line.
 
     revseq -sequence sequence1F-trimmed.fa -outseq sequence1F-trimmed-rev.fa
 
