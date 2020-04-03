@@ -111,7 +111,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     more sequence1-merged.aln
     
 ##### it should look something like this.  Pay special attentio to the identity, similarity and the sequence alignment. 
-![Image of alignment merger]()
+![Image of alignment merger](https://github.com/jvineis/EEMB1105-FISH-COI/blob/master/Screen%20Shot%202020-04-03%20at%2011.11.05%20AM.png)
 
 
 ## 12.  blast the merged sequences against the database of COI sequences.  This command will be run using sbatch
