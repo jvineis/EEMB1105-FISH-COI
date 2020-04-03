@@ -165,7 +165,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
      rsync -HalP "user.name"@login.discovery.neu.edu:/scratch/"user.name"/FISH-COI/fasta-for-treebuild.ph ~/Downloads/fasta-for-treebuild.ph
      
-###### now use figtree http://tree.bio.ed.ac.uk/software/figtree/ to view your sequence in the overall tree. To download figtree, just click on the link for "FigTree.v1.4.4.dmg" and follow the prompts.  
+###### now use figtree http://tree.bio.ed.ac.uk/software/figtree/ to view your sequence in the overall tree. To download figtree, just click on the link for "FigTree.v1.4.4.dmg" and follow the prompts. You can view the tree in figtree by selecting "File" > "Open" and find the tree that you downloaded from discovery called "fasta-for-treebuild.ph" in your Downloads folder.  
        
 ## FOR JOE
 We have a set of fasta files with forward and rev sequences for some COI fish samples from Rosie Falco from the Ocean Genome Legacy program at Northeastern.  I placed these here  on the discovery server.  I tested quality filtering like this.  which seems to work well. Starts by removing Ns within a 20bp window from start and end of the sequences, then reverse compliment the forward sequence, then merge the two.. There was 100% consensus among the forward and reverse sequences.  Will be good to inspect the *.aln* file for each merger.
