@@ -118,8 +118,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 ![Image of alignment merger](https://github.com/jvineis/EEMB1105-FISH-COI/blob/master/Screen%20Shot%202020-04-03%20at%2011.11.05%20AM.png)
 
 ##### and the consensus sequence should look like this
-
-
+![Image of merged sequence](https://github.com/jvineis/EEMB1105-FISH-COI/blob/master/Screen%20Shot%202020-04-03%20at%2011.24.30%20AM.png)
 
 ## 12.  blast the merged sequences against the database of COI sequences.  This command will be run using sbatch
 ### first you need to unload the modules for the course and load the blast module
@@ -127,21 +126,28 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     module unload
     module load ncbi-blast+/2.9.0
 
-### now run the blast command
+### now run the blast command using the sbatch script that you should be familiar with at this point. Remove the "#" in front of the line containing the blastn command shown below and make sure that the "-query" sequence is the same file name that you created in step 11 above.
    
     blastn -db /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
     
-### inspect the results when its complete
-   
+### run the sbatch and then inspect the results when its complete usning the more command as shown below
+    
+    sbatch x_sbatch-to-run-commands.shx
     more sequence1-merged-blastout
 
 ##  TREE Building: Here you will construct a phylogenetic tree that contains all the reference sequences that you ran a BLAST search against, along with your own sequences, in order to see the evolutionary relationship of your sequences with those in the reference.  
 
-### 1. Add your sequences to the reference multi-fasta file. This command pastes your merged, quality filtered single-fasta file onto the end of the multi-fasta reference that contains 1149 sequences
+### 1. Add your three sequences to the reference multi-fasta file. This command pastes your merged, quality filtered single-fasta file onto the end of the multi-fasta reference that contains 1149 sequences to generate a new multi-fasta file called "fasta-for-treebuild.fa"
 
-    cat /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa sequence1-merged.fa > fasta-for-treebuild.fa
+    cat /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa sequence1-merged.fa sequence2-merged.fa sequence3-merged.fa > fasta-for-treebuild.fa
 
-### 2. Now you will create a new sbatch script (as you did in step three above) using emacs to create an alignment and build a tree. This sbatch script will run all of the steps involved in building the tree
+### 2. Now you will create a new sbatch script (as you did in step three above) using emacs to that will include the commands you need to create an alignment and build a tree. You can copy and pase the following text into a file using emacs.  
+
+##### so start with the emacs command
+    
+    emacs x_run-tree-build.shx
+
+##### now copy and paste the following txt into the emacs window.
 
     #!/bin/bash
 
@@ -152,10 +158,9 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     #SBATCH --partition=express
 
     module load EEMB1105/01-24-2020
-    clustalw2 FDA-RSSL.fa
-    
-
-   
+    clustalw2 fasta-for-treebuild.fa > /dev/null # build the alignment.. this will create a file called "fasta-for-treebuild.aln" which will be used in the next step
+    clustal -tree -infile=fasta-for-treebuild.aln > /dev/null # this will use the alignment from the script above to create a newick tree called "fasta-for-treebuild.ph"
+       
 ## FOR JOE
 We have a set of fasta files with forward and rev sequences for some COI fish samples from Rosie Falco from the Ocean Genome Legacy program at Northeastern.  I placed these here  on the discovery server.  I tested quality filtering like this.  which seems to work well. Starts by removing Ns within a 20bp window from start and end of the sequences, then reverse compliment the forward sequence, then merge the two.. There was 100% consensus among the forward and reverse sequences.  Will be good to inspect the *.aln* file for each merger.
 
