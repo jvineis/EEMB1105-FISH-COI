@@ -153,9 +153,9 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
     #SBATCH --nodes=1
     #SBATCH --tasks-per-node=1
-    #SBATCH --time=1:00:00
+    #SBATCH --time=4:00:00
     #SBATCH --mem=100Gb
-    #SBATCH --partition=express
+    #SBATCH --partition=short
 
     module load EEMB1105/01-24-2020
     clustalw2 fasta-for-treebuild.fa > /dev/null # build the alignment.. this will create a file called "fasta-for-treebuild.aln" which will be used in the next step
