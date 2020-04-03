@@ -109,6 +109,10 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 ##### you should inspect the sequence1-merged.aln file. Enter this to see what it looks like
 
     more sequence1-merged.aln
+    
+##### it should look something like this.  Pay special attentio to the identity, similarity and the sequence alignment. 
+
+
 
 ## 12.  blast the merged sequences against the database of COI sequences.  This command will be run using sbatch
 ### first you need to unload the modules for the course and load the blast module
@@ -123,10 +127,30 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 ### inspect the results when its complete
    
     more sequence1-merged-blastout
-    
-###  FOR JOE : working in this directory : /scratch/vineis.j/cap-test
 
-I rec'd a set of fasta files with forward and rev sequences for some COI fish samples from Rosie Falco.  I placed these here /scratch/vineis.j/cap-test/RAW-sequences in the discovery server.  I tested quality filtering like this.  which seems to work well. Starts by removing Ns within a 20bp window from start and end of the sequences, then reverse compliment the forward sequence, then merge the two.. There was 100% consensus among the forward and reverse sequences.  Will be good to inspect the *.aln* file for each merger.
+##  TREE Building: Here you will construct a phylogenetic tree that contains all the reference sequences that you ran a BLAST search against, along with your own sequences, in order to see the evolutionary relationship of your sequences with those in the reference.  
+
+### 1. Add your sequences to the reference multi-fasta file. This command pastes your merged, quality filtered single-fasta file onto the end of the multi-fasta reference that contains 1149 sequences
+
+    cat /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa sequence1-merged.fa > fasta-for-treebuild.fa
+
+### 2. Now you will create a new sbatch script (as you did in step three above) using emacs to create an alignment and build a tree. This sbatch script will run all of the steps involved in building the tree
+
+    #!/bin/bash
+
+    #SBATCH --nodes=1
+    #SBATCH --tasks-per-node=1
+    #SBATCH --time=1:00:00
+    #SBATCH --mem=100Gb
+    #SBATCH --partition=express
+
+    module load EEMB1105/01-24-2020
+    clustalw2 FDA-RSSL.fa
+    
+
+   
+## FOR JOE
+We have a set of fasta files with forward and rev sequences for some COI fish samples from Rosie Falco from the Ocean Genome Legacy program at Northeastern.  I placed these here  on the discovery server.  I tested quality filtering like this.  which seems to work well. Starts by removing Ns within a 20bp window from start and end of the sequences, then reverse compliment the forward sequence, then merge the two.. There was 100% consensus among the forward and reverse sequences.  Will be good to inspect the *.aln* file for each merger.
 
     trimseq -sequence Yuan_10-Fish-H-Fish-H.ab1 -outseq Yuan_10-Fish-H-Fish-H-trimmed.ab1 -window 20 -percent 5
     trimseq -sequence Yuan_10-Fish-L-Fish-L.ab1 -outseq Yuan_10-Fish-L-Fish-L-trimmed.ab1 -window 20 -percent 5
@@ -149,24 +173,6 @@ Then I tested it by unloading the class module and loading the blast module
 Then I tried and example blast and it worked great!
 
     blastn -db ../FDA-RSSL.fa -query Yuan_10-merged.fa -out x_test.txt
-    
-I also build an alignment using the batch script below
-
-    #!/bin/bash
-
-    #SBATCH --nodes=1
-    #SBATCH --tasks-per-node=1
-    #SBATCH --time=6:00:00
-    #SBATCH --mem=10Gb
-    #SBATCH --partition=short
-
-    module load EEMB1105/01-24-2020
-    clustalw2 FDA-RSSL.fa
-    
-Then I build a tree using the alignment.. I tried this on my own machine because of problems with the FastTree install on discovery.. Used clustall all the way.  Just wanted to see what the tree looks like and if its realistic for students.
-
-    
-    
 
     
 
