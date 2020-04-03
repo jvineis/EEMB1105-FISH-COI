@@ -98,20 +98,27 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
     sbatch x_sbatch-to-run-commands.shx
 
-## 10.  Reverse compliment the forward sequence. This command will be run using sbatch. Delete the "#" in front of these lines, remove the * characters from the lines, and change all the names contained between these characters to the relevant names of your sequence
+## 10.  Reverse compliment the forward sequence. This command will be run using sbatch. Delete the "#" in front of these lines, remove the * characters from the lines, and change all the names contained between these characters to the relevant names of your sequence. 
 
     revseq -sequence *sequence1F-trimmed.fa* -outseq *sequence1F-trimmed-rev.fa*
 
-## 11.  Merge the forward and reverse sequences.  This command requires the ouput from the previous sept as input.  This command will be run using sbatch
+##### once you make these changes, run the command below
 
-    merger -asequence sequence1F-trimmed-rev.fa -bsequence sequence1R-trimmed.fa -outfile sequence1-merged.aln -outseq sequence1-merged.fa
+    sbatch x_sbatch-to-run-commands.shx
+    
+## 11.  Merge the forward and reverse sequences.  This command requires the ouput from the previous sept as input.  This command will be run using sbatch. Comment out the last command that you ran in step 10 and delete the "#" in front of the line below. remove the * characters from the lines, and change all the names contained between these characters to the relevant names of your sample.  The "-outfile" in the command below is the alignmen of the forward and reverse sequences and the "-outseq" is a single fasta file that represents the consensus of your forward and reverse sequences   
 
-##### you should inspect the sequence1-merged.aln file. Enter this to see what it looks like
+    merger -asequence *sequence1F-trimmed-rev.fa* -bsequence *sequence1R-trimmed.fa* -outfile *sequence1-merged.aln* -outseq *sequence1-merged.fa*
+
+##### you should inspect the sequence1-merged.aln file. Enter this command to see what it looks like
 
     more sequence1-merged.aln
     
 ##### it should look something like this.  Pay special attentio to the identity, similarity and the sequence alignment. 
 ![Image of alignment merger](https://github.com/jvineis/EEMB1105-FISH-COI/blob/master/Screen%20Shot%202020-04-03%20at%2011.11.05%20AM.png)
+
+##### and the consensus sequence should look like this
+
 
 
 ## 12.  blast the merged sequences against the database of COI sequences.  This command will be run using sbatch
