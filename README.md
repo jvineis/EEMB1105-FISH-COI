@@ -111,7 +111,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     more sequence1-merged.aln
     
 ##### it should look something like this.  Pay special attentio to the identity, similarity and the sequence alignment. 
-
+![Image of alignment merger]()
 
 
 ## 12.  blast the merged sequences against the database of COI sequences.  This command will be run using sbatch
