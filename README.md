@@ -159,7 +159,13 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
     module load EEMB1105/01-24-2020
     clustalw2 fasta-for-treebuild.fa > /dev/null # build the alignment.. this will create a file called "fasta-for-treebuild.aln" which will be used in the next step
-    clustal -tree -infile=fasta-for-treebuild.aln > /dev/null # this will use the alignment from the script above to create a newick tree called "fasta-for-treebuild.ph"
+    clustalw2 -tree -infile=fasta-for-treebuild.aln > /dev/null # this will use the alignment from the script above to create a newick tree called "fasta-for-treebuild.ph"
+    
+###### now download the tree file to your computer... run this command in a new terminal on your machine NOT logged into discovery. don't forget to change the "user.name" to your username
+
+     rsync -HalP "user.name"@login.discovery.neu.edu:/scratch/"user.name"/FISH-COI/fasta-for-treebuild.ph ~/Downloads/fasta-for-treebuild.ph
+     
+###### now use figtree http://tree.bio.ed.ac.uk/software/figtree/ to view your sequence in the overall tree. To download figtree, just click on the link for "FigTree.v1.4.4.dmg" and follow the prompts.  
        
 ## FOR JOE
 We have a set of fasta files with forward and rev sequences for some COI fish samples from Rosie Falco from the Ocean Genome Legacy program at Northeastern.  I placed these here  on the discovery server.  I tested quality filtering like this.  which seems to work well. Starts by removing Ns within a 20bp window from start and end of the sequences, then reverse compliment the forward sequence, then merge the two.. There was 100% consensus among the forward and reverse sequences.  Will be good to inspect the *.aln* file for each merger.
