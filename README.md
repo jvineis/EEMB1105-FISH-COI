@@ -62,13 +62,13 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     
 ##### 3. Copy and paste the following test below (beginning with "#!/bin/bash) into the blank space that appeared when you ran the emacs command above.  Then you save the file and close it by followig the next steps exactly: 1. hold down the "control" key; 2. press the "x" key; 3. release the "x" key; 4. press the "s" key; 5. release the "s" key 6. release the "control" key.  7.  hold down the "control" key; 8. press the "x" key; 9. release the "x" key; 10. press the "c" key; 11. release the "c" key; 12. release the "control" key.  Your file will now be saved and closed.  You can reopen it using step 2 above and make the edits that you will need to run each of the scripts below. 
 
-    #!/bin/bash  # this tells the head node that I'm speaking in "bash" language.
+    #!/bin/bash  
 
-    #SBATCH --nodes=1                #This specifies the number of nodes I need
-    #SBATCH --tasks-per-node=1       #This is the number of tasks per node and only needs to be changed if the job can be broken apart into smaller jobs.. not the case for any of the jobs you will submit
-    #SBATCH --time=00:30:00          #The amount of time that you think the command will take to run
-    #SBATCH --mem=50Gb               #The amount of memory required for the command
-    #SBATCH --partition=express      #There are several partioins (large groups of nodes) that you can submit jobs to.. your jobs will all be submitted to the express
+    #SBATCH --nodes=1                
+    #SBATCH --tasks-per-node=1       
+    #SBATCH --time=00:30:00          
+    #SBATCH --mem=50Gb               
+    #SBATCH --partition=express      
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     ## You will never need to change any of the details above this line.  All the business is below the line above
