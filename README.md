@@ -86,6 +86,9 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     
     ## To blast a sequence against the reference database of COI fish sequences provied by the Ocean Genome Legacy.
     #blastn -db /work/jennifer.bowen/EEMB1105/EXAMPLE-DATA/cap-test/FDA-RSSL.fa -query sequence1-merged.fa -out sequence1-merged-blastout
+    
+    ## If your top blast hit to the reference inicates that the match is "Strand=PLUS/MINUS" and not "Strand=PLUS/PLUS", you will need to reverse compliment the sequence prior to building a tree. Here is the command to reverse compliment your merged sequence.
+    #revseq -sequence sequence1-merged.fa -outseq sequence1-merged-rev.fa
 
 ##### 4. You will make changes to the sbatch script anytime that you want to run a different command below.  The main change that you will make is adding and subtracting "#" at the beginning of specific lines in order to run each of the individual steps to process the sequences. So pick things up at step 9 below.  
 
@@ -134,6 +137,8 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     
     sbatch x_sbatch-to-run-commands.shx
     more sequence1-merged-blastout
+
+### Inspect the header information of your best blast alignment, there is a line that indicates whether the orientation of the matching sequence was in the forward or reverse orientation.  It looks like this. ![Image of blast header]() 
 
 ##  TREE Building: Here you will construct a phylogenetic tree that contains all the reference sequences that you ran a BLAST search against, along with your own sequences, in order to see the evolutionary relationship of your sequences with those in the reference.  
 
