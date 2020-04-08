@@ -138,7 +138,11 @@ instead of *user.name*, add your own credentials (usually, last name followed by
     sbatch x_sbatch-to-run-commands.shx
     more sequence1-merged-blastout
 
-### Inspect the header information of your best blast alignment, there is a line that indicates whether the orientation of the matching sequence was in the forward or reverse orientation.  It looks like this. ![Image of blast header]() 
+### Inspect the header information of your best blast alignment, there is a line that indicates whether the orientation of the matching sequence was in the forward or reverse orientation.  It looks like this. ![Image of blast header](https://github.com/jvineis/EEMB1105-FISH-COI/blob/master/Screen%20Shot%202020-04-08%20at%208.29.06%20AM.png) 
+
+### See how the text indicates that the "Strand=Plus/Minus".  This incates that your sequence match is in the reverse compliment orientation.  Therefore, we need to reverse compliment your sequences prior to building a tree.  Comment out the lines below in the sbash script (you should be used to this now) to reverse compliment your sequences. The input "-sequence" should be the name of your merged sequence and the "-outseq" should reflect that the sequence is reversed. Run the x_sbatch-to-run-commands.shx in the usual way after making these changes. 
+
+    revseq -sequence sequence1-merged.fa -outseq sequence1-merged-rev.fa
 
 ##  TREE Building: Here you will construct a phylogenetic tree that contains all the reference sequences that you ran a BLAST search against, along with your own sequences, in order to see the evolutionary relationship of your sequences with those in the reference.  
 
