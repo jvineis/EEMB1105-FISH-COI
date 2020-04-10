@@ -60,7 +60,7 @@ instead of *user.name*, add your own credentials (usually, last name followed by
 
     emacs x_sbatch-to-run-commands.shx
     
-##### 3. Copy and paste the following test below (beginning with "#!/bin/bash) into the blank space that appeared when you ran the emacs command above.  Then you save the file and close it by followig the next steps exactly: 1. hold down the "control" key; 2. press the "x" key; 3. release the "x" key; 4. press the "s" key; 5. release the "s" key 6. release the "control" key.  7.  hold down the "control" key; 8. press the "x" key; 9. release the "x" key; 10. press the "c" key; 11. release the "c" key; 12. release the "control" key.  Your file will now be saved and closed.  You can reopen it using step 2 above and make the edits that you will need to run each of the scripts below. 
+##### 3. Copy and paste the following text below (beginning with "#!/bin/bash) into the blank space that appeared when you ran the emacs command above.  Then you save the file and close it by followig the next steps exactly: 1. hold down the "control" key; 2. press the "x" key; 3. release the "x" key; 4. press the "s" key; 5. release the "s" key 6. release the "control" key.  7.  hold down the "control" key; 8. press the "x" key; 9. release the "x" key; 10. press the "c" key; 11. release the "c" key; 12. release the "control" key.  Your file will now be saved and closed.  You can reopen it using step 2 above and make the edits that you will need to run each of the scripts below. 
 
     #!/bin/bash  
 
